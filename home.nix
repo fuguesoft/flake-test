@@ -410,7 +410,7 @@ in
   programs.fuzzel = {
     enable = true;
     settings = {
-      colors.background = "00000009";
+      colors.background = "000000d9";
       main.terminal = ''
         foot -a "{cmd}" -T "{cmd}" {cmd}
       '';
