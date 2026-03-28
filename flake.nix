@@ -25,7 +25,6 @@
         inherit system;
         modules = [
           ./configuration.nix
-          ./home.nix
         ];
       };
 
