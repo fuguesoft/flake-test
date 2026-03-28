@@ -86,7 +86,7 @@ in
     # streamlink-twitch-gui-bin
     # sway
     # swaybg
-    # stremio # outdated qt-engine dependency
+    # stremio # outdated qt-engine dependency (try flatpak)
     tagainijisho
     teensy-loader-cli
     # tic-80 - requires insecure
@@ -406,7 +406,12 @@ in
     ];
   };
 
-  programs.fuzzel.enable = true;
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      colors.background = "00000009";
+    };
+  };
   # programs.wikiman.enable = true;
 
   # we will replace this on the daily once we can reliably reproduce the flake
