@@ -35,7 +35,7 @@ in
     dia
     ddgr
     dialog
-    discordo
+    # discordo
     dmenu-wayland
     dunst
     # espanso
@@ -45,14 +45,14 @@ in
     # fluffychat
     # freecad
     gh
-    godot
+    # godot
     # goldendict-ng
     # graphite
     groff
     help2man
     heroic
     hyfetch
-    iamb
+    # iamb
     # inkscape
     isort
     lilypond
@@ -83,7 +83,7 @@ in
     # soundtracker
     # sox
     # streamlink
-    streamlink-twitch-gui-bin
+    # streamlink-twitch-gui-bin
     # sway
     # swaybg
     # stremio # outdated qt-engine dependency
