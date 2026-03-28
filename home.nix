@@ -18,13 +18,13 @@ in
 
   home.packages = with pkgs; [
     asciinema
-    aseprite
+    # aseprite
     bat
     # bitwig-studio
     bottles
     btop
     tealdeer
-    blender
+    # blender
     bibletime
     # package to watch/package?
     # https://codeberg.org/janantos/brow6el
@@ -42,23 +42,23 @@ in
     f3
     fastfetch
     # ffmpeg
-    fluffychat
-    freecad
+    # fluffychat
+    # freecad
     gh
     godot
-    goldendict-ng
+    # goldendict-ng
     # graphite
     groff
     help2man
     heroic
     hyfetch
     iamb
-    inkscape
+    # inkscape
     isort
     lilypond
     # lilgptracker
     localsend
-    # lutris - requires steam
+    # lutris - requires steam (unfree)
     man
     man-pages
     mandown
@@ -71,15 +71,15 @@ in
     nethack
     nudoku
     obs-cli
-    openscad
-    pixieditor
-    pureref
+    # openscad
+    # pixieditor
+    # pureref
     # qrencode
-    reaper
+    # reaper
     ripgrep
-    schismtracker
+    # schismtracker
     sioyek
-    solvespace
+    # solvespace
     # soundtracker
     # sox
     # streamlink
@@ -96,14 +96,14 @@ in
     tor
     trash-cli
     # verse # gonna package this
-    vesktop
+    # vesktop
     vimiv-qt
     warpd
     waybar
     weechat
     wf-recorder
-    wikiman
-    winboat
+    # wikiman
+    # winboat
     wine-wayland
     winetricks
     wiremix
