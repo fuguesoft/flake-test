@@ -215,6 +215,7 @@ in
   home.sessionVariables = rec {
     EDITOR = "nvim";
     VISUAL = "nvim";
+    TERMINAL = "foot";
 
     XDG_DATA_HOME = "${HOME}\/.local/share";
     XDG_CONFIG_HOME = "${HOME}\/.config";
@@ -410,6 +411,9 @@ in
     enable = true;
     settings = {
       colors.background = "00000009";
+      terminal = ''
+        foot -a "{cmd}" -T "{cmd}" {cmd}
+      '';
     };
   };
   # programs.wikiman.enable = true;
