@@ -35,17 +35,17 @@ in
     dia
     ddgr
     dialog
-    # discordo
+    discordo
     dmenu-wayland
     dunst
-    # espanso
+    espanso
     f3
     fastfetch
     # ffmpeg
     # fluffychat
     # freecad
     gh
-    # godot
+    godot
     # goldendict-ng
     # graphite
     groff
@@ -96,7 +96,7 @@ in
     tor
     trash-cli
     # verse # gonna package this
-    # vesktop
+    vesktop
     vimiv-qt
     warpd
     waybar
@@ -155,6 +155,18 @@ in
   programs.home-manager.enable = true;
   programs.fish.enable = true;
   programs.lutris.enable = true;
+
+  programs.git = {
+    enable = true;
+    settings = {
+      core.editor = "nvim";
+      user = {
+        name = "fuguesoft";
+        email = "31870368+fuguesoft@users.noreply.github.com";
+      };
+      init.defaultbranch = "main";
+    };
+  };
 
   programs.gh = {
     enable = true;
