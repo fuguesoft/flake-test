@@ -411,7 +411,7 @@ in
     enable = true;
     settings = {
       colors.background = "00000009";
-      terminal = ''
+      main.terminal = ''
         foot -a "{cmd}" -T "{cmd}" {cmd}
       '';
     };
