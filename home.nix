@@ -32,10 +32,10 @@ in
     cmatrix
     codeberg-cli
     cpufetch
-    dia
+    # dia
     ddgr
     dialog
-    discordo
+    # discordo
     dmenu-wayland
     dunst
     espanso
@@ -45,7 +45,7 @@ in
     # fluffychat
     # freecad
     gh
-    godot
+    # godot
     # goldendict-ng
     # graphite
     groff
@@ -57,7 +57,7 @@ in
     isort
     lilypond
     # lilgptracker
-    localsend
+    # localsend
     # lutris - requires steam (unfree)
     man
     man-pages
@@ -87,7 +87,7 @@ in
     # sway
     # swaybg
     # stremio # outdated qt-engine dependency (try flatpak)
-    tagainijisho
+    # tagainijisho
     teensy-loader-cli
     # tic-80 - requires insecure
     tig
@@ -416,6 +416,7 @@ in
       '';
     };
   };
+
   # programs.wikiman.enable = true;
 
   # we will replace this on the daily once we can reliably reproduce the flake

@@ -152,6 +152,7 @@
     git
     gnumake
     greetd
+    hello
     home-manager
     inxi
     pciutils
