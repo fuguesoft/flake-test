@@ -159,6 +159,7 @@ Install NixOS, passing the `--no-root-password` to disable the root account:
 
 ```sh
 nixos-enter --root /mnt -c 'passwd vampire-steve'
+# enter and confirm password
 reboot
 ```
 
