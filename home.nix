@@ -21,7 +21,7 @@ in
     # aseprite
     bat
     # bitwig-studio
-    bottles
+    # bottles
     btop
     tealdeer
     # blender

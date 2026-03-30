@@ -13,6 +13,7 @@ a variety of systems as I learn how they work.
 Mostly taken from the [official guide](https://nixos.org/manual/nixos/stable/#sec-installation-manual)
 
 Download the most recent [NixOS ISO](https://nixos.org/download)
+
 This guide assumes the minimal installer.
 
 #### Connect to the internet
