@@ -19,22 +19,28 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      nixosSystem = nixpkgs.lib.nixosSystem;
+      homeManagerConfiguration = home-manager.lib.homeManagerConfiguration;
     in
     {
-      nixosConfigurations.indigo = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./configuration.nix
-        ];
+      nixosConfigurations = {
+        indigo = nixosSystem {
+          inherit system;
+          modules = [
+            ./configuration.nix
+          ];
+        };
+        # another-hostname = nixosSystem {};
       };
 
-      homeConfigurations."fugue" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./home.nix
-        ];
-
+      homeConfigurations = {
+        "fugue" = homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./home.nix
+          ];
+        };
+        # "another-user" = homeManagerConfiguration {};
       };
-
     };
 }
