@@ -10,7 +10,10 @@ a variety of systems as I learn how they work.
 ## Installation
 
 ### Linux (Nix)
-Mostly taken from the [official guide](https://nixos.org/manual/nixos/stable/#sec-installation-manual)
+Mostly taken from:
+
+- The [official guide](https://nixos.org/manual/nixos/stable/#sec-installation-manual)
+- Tony Banters [Guide](https://www.tonybtw.com/tutorial/nixos-from-scratch/)
 
 Download the most recent [NixOS ISO](https://nixos.org/download)
 
