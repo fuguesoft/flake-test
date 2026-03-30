@@ -14,6 +14,12 @@ Mostly taken from the [official guide](https://nixos.org/manual/nixos/stable/#se
 
 Download the most recent [NixOS ISO](https://nixos.org/download)
 
+Burn the ISO to a drive and boot from it:
+
+```sh
+dd if=/path/to/NixOS-iso of=/dev/device-label bs=4M status=progress
+```
+
 This guide assumes the minimal installer.
 
 #### Connect to the internet
@@ -159,7 +165,7 @@ reboot
 Lastly, run the flake to try it out.
 
 ```sh
-nix run git@github.com:fuguesoft/test-flake
+nix run git@github.com:fuguesoft/flake-test
 ```
 
 ### Linux (Non-nix)
