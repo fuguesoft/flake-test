@@ -25,10 +25,17 @@ dd if=/path/to/NixOS-iso of=/dev/device-label bs=4M status=progress
 
 This guide assumes the minimal installer.
 
-#### Connect to the internet
+#### Environment
 
+Connect to the internet
 ```sh
 nmcli --ask device wifi connect <SSID>
+```
+
+Install some useful tools
+```sh
+nix-shell -p asciinema tmux
+tmux
 ```
 
 #### Set up partitions and filesystems
@@ -73,6 +80,11 @@ mkfs.ext4 -L home /dev/<diskID><partition-number>
 #### Set up mounting
 After labeling the drives mount them to their proper mount points.
 
+`/`
+```sh
+mount /dev/<diskID><partition-number> /mnt
+```
+
 `/boot`
 ```sh
 mount -o umask=077 --mkdir /dev/<diskID><partition-number> /mnt/boot
@@ -81,11 +93,6 @@ mount -o umask=077 --mkdir /dev/<diskID><partition-number> /mnt/boot
 `/swap`
 ```sh
 swapon /dev/<diskID><diskID><partition-number>
-```
-
-`/`
-```sh
-mount /dev/<diskID><partition-number> /mnt
 ```
 
 `/home`
@@ -101,76 +108,27 @@ mount -t efivarfs efivarfs /sys/firmware/efi/efivars/
 
 Check the partitions with `lsblk -f`
 
-#### Edit /etc/configuration.nix
+#### Generate Configs
 After all that, run the following command to generate the system and hardware
 configs at `/mnt/etc/nixos`:
 
 ```sh
-nixos-generate-config --root /mnt
+nixos-generate-config --root /mnt --flake
 ```
 
-Edit the generated `configuration.nix`
+Install NixOS, passing the `--no-root-password` flag to disable the root account. Include the path to this repository along with the desired configuration as the `--flake` parameter:
 
-```sh
-vim /mnt/etc/nixos/configuration.nix
-```
-
-Add the following to enable flakes:
-
-```nix
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-  };
-```
-
-Make your other desired changes to the generated `configuration.nix` file like
-adding a new user, changing the hostname, setting the timezone, etc:
-
-```nix
-  # Install some system level utils
-  environment.systemPackages = with pkgs; [
-    btop
-    fd
-    git
-    home-manager
-    nvim
-    ripgrep
-    tmux
-  ];
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.vampire-steve = {
-    shell = pkgs.fish;
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-
-    # Install some packages at the user level
-    packages = with pkgs; [
-      foot
-      keyd
-      librewolf
-      tree
-    ];
-  };
-```
-
-Install NixOS, passing the `--no-root-password` to disable the root account:
-
-`nixos-install --no-root-password `
+`nixos-install --no-root-password --flake github:fuguesoft/flake-test#indigo`
 
 **Before reboot**, make a password for your user:
 
 ```sh
-nixos-enter --root /mnt -c 'passwd vampire-steve'
+nixos-enter --root /mnt -c 'passwd fugue'
 # enter and confirm password
 reboot
 ```
 
-Lastly, run the flake to try it out.
-
-```sh
-nix run git@github.com:fuguesoft/flake-test
-```
+Become perplexed when the bootloader can't find the devices you set up.
 
 ### Linux (Non-nix)
 
