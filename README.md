@@ -109,18 +109,38 @@ mount -t efivarfs efivarfs /sys/firmware/efi/efivars/
 Check the partitions with `lsblk -f`
 
 #### Generate Configs
-After all that, run the following command to generate the system and hardware
-configs at `/mnt/etc/nixos`:
+
+Clone the flake down:
+
+```sh
+git clone github:fuguesoft/flake-test
+```
+
+
+We can't just install from this point without tweaking a few things. First,
+generate the system and configurations at `/mnt/etc/nixos`:
 
 ```sh
 nixos-generate-config --root /mnt --flake
 ```
 
-Install NixOS, passing the `--no-root-password` flag to disable the root account. Include the path to this repository along with the desired configuration as the `--flake` parameter:
+Then copy the `hardware-configuration.nix` into your flake overwriting the
+existing file:
 
-`nixos-install --no-root-password --flake github:fuguesoft/flake-test#indigo`
+```sh
+cp -f /mnt/etc/nixos/hardware-configuration.nix /path/to/flake-test
+```
 
-**Before reboot**, make a password for your user:
+In the `/path/to/flake-test/configuration.nix` make sure to update the user and
+hostname fields as desired.
+
+Install NixOS, passing the `--no-root-password` flag to disable the root
+account. Include the path to this repository along with the desired
+configuration as the `--flake` parameter. Example for configuration `indigo`:
+
+`nixos-install --no-root-password --flake path/to/fuguesoft/flake-test#indigo`
+
+**Before reboot**, make a password for your user. For the user `fugue`:
 
 ```sh
 nixos-enter --root /mnt -c 'passwd fugue'
@@ -128,7 +148,53 @@ nixos-enter --root /mnt -c 'passwd fugue'
 reboot
 ```
 
-Become perplexed when the bootloader can't find the devices you set up.
+#### Troubleshooting
+
+It may be that the `/` and `/home` uuids are not found after a reboot. If that
+is the case, you'll need to reapat some of the process again:
+
+1. Boot into the recovery ISO remount the disks.
+2. Generate the configs once more
+3. Edit the `hardware-configuration.nix` and replace the
+   `fileSystems."{device-name}".device` with `fileSystem."{device-name}".label`
+
+Example:
+
+```nix
+{ config, lib, pkgs, modulesPath, ... }:
+
+{
+  # ...
+  fileSystems."/" =
+    { 
+      # device = "/dev/disk/by-uuid/c5a651f2-60a0-417b-a03b-2219843481a8";
+      label = "nixos";
+      fsType = "ext4";
+    };
+
+  fileSystems."/boot" =
+    { 
+      # device = "/dev/disk/by-uuid/E7C2-0E41";
+      label = "boot";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
+  fileSystems."/home" =
+    { 
+      # device = "/dev/disk/by-uuid/cdabbcd5-761d-4472-bc25-195c5a771a19";
+      label = "home";
+      fsType = "ext4";
+    };
+
+  swapDevices = [ { device = "foobar" } ];
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+}
+```
+
+Then copy the file over again, run the install and set the password
 
 ### Linux (Non-nix)
 
