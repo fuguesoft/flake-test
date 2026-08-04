@@ -57,6 +57,11 @@ Write the changes and Quit. Confirm your work with `lsblk -f`
 
 After writing those partitions, mount them and prepare for the install:
 
+`/`
+```sh
+mkfs.ext4 -L nixos /dev/<diskID><partition-number>
+```
+
 `/boot`
 ```sh
 mkfs.fat -F 32 -n boot /dev/<diskID><partition-number>
@@ -65,11 +70,6 @@ mkfs.fat -F 32 -n boot /dev/<diskID><partition-number>
 `/swap`
 ```sh
 mkswap -L swap /dev/<diskID><partition-number>
-```
-
-`/`
-```sh
-mkfs.ext4 -L nixos /dev/<diskID><partition-number>
 ```
 
 `/home`
